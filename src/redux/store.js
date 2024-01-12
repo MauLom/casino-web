@@ -1,15 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-// Import your reducers here
-import userReducer from './reducers/userReducer';
-// Import other reducers as needed
+import { createStore, combineReducers } from 'redux';
+import authReducer from './reducers/authReducer';
+// ... other imports
 
-export const store = configureStore({
-  reducer: {
-    // Add your reducers here
-    user: userReducer,
-    // other reducers go here
-  },
-  // Middleware can be customized here if needed
+const rootReducer = combineReducers({
+    auth: authReducer
+    // ... other reducers
 });
 
+const store = createStore(rootReducer);
 export default store;

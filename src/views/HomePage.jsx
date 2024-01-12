@@ -1,18 +1,29 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../redux/actions/authActions';
 // Import any additional components or styles
 
 function HomePage() {
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        // Additional logout logic (if any)
+    };
+
     return (
         <div>
             <header>
-                <h1>Welcome to Our Platform</h1>
+                <h1>MUR</h1>
                 <p>This is the main page of our web application.</p>
             </header>
 
             <nav>
                 <ul>
-                    <li><Link to="/login">Login</Link></li>
+                    {!isLoggedIn && <li><Link to="/login">Login</Link></li>}
+                    {isLoggedIn && <li><button onClick={handleLogout}>Logout</button></li>}
                     <li><Link to="/dashboard">Dashboard</Link></li>
                     {/* Add more navigation links as needed */}
                 </ul>
